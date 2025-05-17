@@ -80,8 +80,8 @@ public class DistanceGraphApp {
         NodeData nodeData = new NodeData(NUM_NODES);
 
         try {
-            nodeData.loadNames("E:\\Project\\JAVA\\extra_work\\Final_Points.csv");
-            graph.loadMatrix("E:\\Project\\JAVA\\extra_work\\updated_weights_matrix.csv");
+            nodeData.loadNames("E:\\Project\\JAVA\\extra_work\\csv_files\\Final_Points.csv");
+            graph.loadMatrix("E:\\Project\\JAVA\\extra_work\\csv_files\\updated_weights_matrix.csv");
 
             // Get node indices
             ArrayList<Integer> restaurantIndices = new ArrayList<>();
