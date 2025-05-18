@@ -35,7 +35,7 @@ public class DistanceGraphApp {
             gbc.insets = new Insets(10, 10, 10, 10);
             gbc.fill = GridBagConstraints.HORIZONTAL;
 
-            JLabel heading = new JLabel("Dilivery route Optimization", SwingConstants.CENTER);
+            JLabel heading = new JLabel("Delivery Route Optimization", SwingConstants.CENTER);
             heading.setFont(new Font("SansSerif", Font.BOLD, 20));
             gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
             frame.add(heading, gbc);
@@ -68,7 +68,7 @@ public class DistanceGraphApp {
             frame.add(runButton, gbc);
 
             // Output display
-            JTextArea resultArea = new JTextArea(5, 30);
+            JTextArea resultArea = new JTextArea(5, 50);
             resultArea.setEditable(false);
             JScrollPane scrollPane = new JScrollPane(resultArea);
             gbc.gridy = 4;
