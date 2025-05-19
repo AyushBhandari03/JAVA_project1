@@ -1,5 +1,5 @@
 package project1;
-// Represents the structure and data of the graph including distance matrix
+
 import java.io.*;
 
 public class Graph {
@@ -11,16 +11,16 @@ public class Graph {
         this.matrix = new double[size][size];
     }
 
-    public void loadMatrix(String filename) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+    public void loadMatrix(String file) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             int row = 0;
             br.readLine(); // Skip header
             while ((line = br.readLine()) != null && row < size) {
-                String[] values = line.split(",", -1);
-                for (int col = 1; col < size + 1 && col < values.length; col++) {
+                String[] vals = line.split(",", -1);
+                for (int col = 1; col < size + 1 && col < vals.length; col++) {
                     try {
-                        String val = values[col].trim();
+                        String val = vals[col].trim();
                         matrix[row][col - 1] = val.isEmpty() ? Double.POSITIVE_INFINITY : Double.parseDouble(val);
                     } catch (NumberFormatException e) {
                         matrix[row][col - 1] = Double.POSITIVE_INFINITY;

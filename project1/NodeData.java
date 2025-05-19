@@ -1,6 +1,8 @@
 package project1;
-// Manages the loading and access of node nicknames and names
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class NodeData {
     private final String[] nicknames;
@@ -11,19 +13,28 @@ public class NodeData {
         this.names = new String[size];
     }
 
-    public void loadNames(String filename) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+    public void loadNames(String file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        try {
+            int row = 0;
             String line;
-            int i = 0;
-            while ((line = br.readLine()) != null && i < nicknames.length) {
-                String[] parts = line.split(",", -1);
-                if (parts.length >= 2) {
-                    nicknames[i] = parts[0].trim();
-                    names[i] = parts[1].trim();
-                    i++;
+            while ((line = reader.readLine()) != null && row < nicknames.length) {
+                String[] values = line.split(",", -1);
+                if (values.length >= 2) {
+                    nicknames[row] = values[0].trim();
+                    names[row] = values[1].trim();
+                    row++;
                 }
             }
+        } catch (Throwable t) {
+            try {
+                reader.close();
+            } catch (Throwable t2) {
+                t.addSuppressed(t2);
+            }
+            throw t;
         }
+        reader.close();
     }
 
     public String getNickname(int index) {
