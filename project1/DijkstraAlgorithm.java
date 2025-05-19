@@ -1,3 +1,12 @@
+// DijkstraAlgorithm.java
+// ----------------------
+// Implements Dijkstra's algorithm for shortest path.
+// - Computes minimum distances from source node to all nodes.
+// - Uses a visited array and distance array for tracking progress.
+// - Reconstructs the shortest path using a predecessor array.
+// - Formats and returns the result including total distance and path.
+// - Contains helper methods: minDistance() and getPathString().
+
 package project1;
 
 import java.util.*;

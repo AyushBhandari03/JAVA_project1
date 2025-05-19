@@ -1,3 +1,11 @@
+// Graph.java
+// ----------
+// Represents the graph using an adjacency matrix.
+// - Stores distances between nodes (edges) as a 2D array.
+// - Loads the distance matrix from a CSV file.
+// - Empty cells or errors are treated as infinite distances.
+// - Provides access to matrix values via getDistance() and getSize().
+
 package project1;
 
 import java.io.*;

@@ -1,3 +1,12 @@
+// DistanceGraphApp.java
+// ---------------------
+// Main application class with GUI.
+// - Loads node data and distance matrix from CSV files.
+// - Filters restaurant and destination nodes.
+// - Provides a Swing-based GUI with dropdowns and a result area.
+// - On button click, uses DijkstraAlgorithm to find the shortest path.
+// - Displays the result in a JTextArea.
+
 package project1;
 
 import javax.swing.*;

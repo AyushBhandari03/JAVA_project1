@@ -1,3 +1,12 @@
+// NodeData.java
+// -------------
+// Handles metadata for each graph node.
+// - Stores names and nicknames of each location.
+// - Loads data from a CSV file with two columns per row.
+// - Used to distinguish between restaurants and other locations.
+// - Provides methods to get name/nickname and validate destinations.
+// - Filters out restaurant nodes when checking for valid delivery targets.
+
 package project1;
 
 import java.io.BufferedReader;
