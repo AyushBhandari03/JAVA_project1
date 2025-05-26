@@ -7,72 +7,72 @@
 // - Formats and returns the result including total distance and path.
 // - Contains helper methods: minDistance() and getPathString().
 
-package project1;
+// package project1;
 
-import java.util.*;
+// import java.util.*;
 
-public class DijkstraAlgorithm {
-    public static String dijkstra(Graph graph, NodeData nodeData, int src, int dest) {
-        int size = graph.getSize();
-        double[] dist = new double[size];
-        int[] prev = new int[size];
-        boolean[] visited = new boolean[size];
+// public class DijkstraAlgorithm {
+//     public static String dijkstra(Graph graph, NodeData nodeData, int src, int dest) {
+//         int size = graph.getSize();
+//         double[] dist = new double[size];
+//         int[] prev = new int[size];
+//         boolean[] visited = new boolean[size];
 
-        Arrays.fill(dist, Double.POSITIVE_INFINITY);
-        Arrays.fill(prev, -1);
-        dist[src] = 0;
+//         Arrays.fill(dist, Double.POSITIVE_INFINITY);
+//         Arrays.fill(prev, -1);
+//         dist[src] = 0;
 
-        for (int i = 0; i < size; i++) {
-            int u = minDistance(dist, visited);
-            if (u == -1) break;
+//         for (int i = 0; i < size; i++) {
+//             int u = minDistance(dist, visited);
+//             if (u == -1) break;
 
-            visited[u] = true;
+//             visited[u] = true;
 
-            for (int v = 0; v < size; v++) {
-                if (!visited[v] && graph.getDistance(u, v) < Double.POSITIVE_INFINITY &&
-                        dist[u] + graph.getDistance(u, v) < dist[v]) {
-                    dist[v] = dist[u] + graph.getDistance(u, v);
-                    prev[v] = u;
-                }
-            }
-        }
+//             for (int v = 0; v < size; v++) {
+//                 if (!visited[v] && graph.getDistance(u, v) < Double.POSITIVE_INFINITY &&
+//                         dist[u] + graph.getDistance(u, v) < dist[v]) {
+//                     dist[v] = dist[u] + graph.getDistance(u, v);
+//                     prev[v] = u;
+//                 }
+//             }
+//         }
 
-        if (dist[dest] == Double.POSITIVE_INFINITY) {
-            return "No path found from " + nodeData.getName(src) + " to " + nodeData.getName(dest);
-        }
+//         if (dist[dest] == Double.POSITIVE_INFINITY) {
+//             return "No path found from " + nodeData.getName(src) + " to " + nodeData.getName(dest);
+//         }
 
-        StringBuilder result = new StringBuilder();
-        result.append(String.format("Minimum Distance from %s to %s: %.2f km\n",
-                nodeData.getName(src), nodeData.getName(dest), dist[dest]));
-        result.append("Path: ");
-        result.append(getPathString(prev, nodeData, dest));
+//         StringBuilder result = new StringBuilder();
+//         result.append(String.format("Minimum Distance from %s to %s: %.2f km\n",
+//                 nodeData.getName(src), nodeData.getName(dest), dist[dest]));
+//         result.append("Path: ");
+//         result.append(getPathString(prev, nodeData, dest));
 
-        return result.toString();
-    }
+//         return result.toString();
+//     }
 
-    private static int minDistance(double[] dist, boolean[] visited) {
-        double min = Double.POSITIVE_INFINITY;
-        int index = -1;
+//     private static int minDistance(double[] dist, boolean[] visited) {
+//         double min = Double.POSITIVE_INFINITY;
+//         int index = -1;
 
-        for (int v = 0; v < dist.length; v++) {
-            if (!visited[v] && dist[v] < min) {
-                min = dist[v];
-                index = v;
-            }
-        }
-        return index;
-    }
+//         for (int v = 0; v < dist.length; v++) {
+//             if (!visited[v] && dist[v] < min) {
+//                 min = dist[v];
+//                 index = v;
+//             }
+//         }
+//         return index;
+//     }
 
-    private static String getPathString(int[] prev, NodeData nodeData, int node) {
-        List<String> path = new ArrayList<>();
-        while (node != -1) {
-            path.add(nodeData.getName(node));
-            node = prev[node];
-        }
-        Collections.reverse(path);
-        return String.join(" -> ", path);
-    }
-}
+//     private static String getPathString(int[] prev, NodeData nodeData, int node) {
+//         List<String> path = new ArrayList<>();
+//         while (node != -1) {
+//             path.add(nodeData.getName(node));
+//             node = prev[node];
+//         }
+//         Collections.reverse(path);
+//         return String.join(" -> ", path);
+//     }
+// }
 
 
 
@@ -141,3 +141,100 @@ public class DijkstraAlgorithm {
 //     }
 // }
 
+
+
+
+package project1;
+
+import java.util.*;
+
+public class DijkstraAlgorithm {
+
+    // Returns detailed string output (for display)
+    public static String dijkstra(Graph graph, NodeData nodeData, int src, int dest) {
+        PathResult pathResult = computePath(graph, src, dest);
+
+        if (pathResult.path.isEmpty()) {
+            return "No path found from " + nodeData.getName(src) + " to " + nodeData.getName(dest);
+        }
+
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("Minimum Distance from %s to %s: %.2f km\n",
+                nodeData.getName(src), nodeData.getName(dest), pathResult.distance));
+        result.append("Path: ");
+
+        List<String> namedPath = new ArrayList<>();
+        for (int idx : pathResult.path) {
+            namedPath.add(nodeData.getName(idx));
+        }
+
+        result.append(String.join(" -> ", namedPath));
+        return result.toString();
+    }
+
+    // New function to return just the path as a list of node indices
+    public static List<Integer> getPathIndices(Graph graph, int src, int dest) {
+        return computePath(graph, src, dest).path;
+    }
+
+    // Internal utility to avoid duplicate logic
+    private static PathResult computePath(Graph graph, int src, int dest) {
+        int size = graph.getSize();
+        double[] dist = new double[size];
+        int[] prev = new int[size];
+        boolean[] visited = new boolean[size];
+
+        Arrays.fill(dist, Double.POSITIVE_INFINITY);
+        Arrays.fill(prev, -1);
+        dist[src] = 0;
+
+        for (int i = 0; i < size; i++) {
+            int u = minDistance(dist, visited);
+            if (u == -1) break;
+
+            visited[u] = true;
+
+            for (int v = 0; v < size; v++) {
+                if (!visited[v] && graph.getDistance(u, v) < Double.POSITIVE_INFINITY &&
+                        dist[u] + graph.getDistance(u, v) < dist[v]) {
+                    dist[v] = dist[u] + graph.getDistance(u, v);
+                    prev[v] = u;
+                }
+            }
+        }
+
+        List<Integer> path = new ArrayList<>();
+        if (dist[dest] != Double.POSITIVE_INFINITY) {
+            for (int at = dest; at != -1; at = prev[at]) {
+                path.add(at);
+            }
+            Collections.reverse(path);
+        }
+
+        return new PathResult(path, dist[dest]);
+    }
+
+    private static int minDistance(double[] dist, boolean[] visited) {
+        double min = Double.POSITIVE_INFINITY;
+        int index = -1;
+
+        for (int v = 0; v < dist.length; v++) {
+            if (!visited[v] && dist[v] < min) {
+                min = dist[v];
+                index = v;
+            }
+        }
+        return index;
+    }
+
+    // Helper class to store path and distance
+    private static class PathResult {
+        List<Integer> path;
+        double distance;
+
+        public PathResult(List<Integer> path, double distance) {
+            this.path = path;
+            this.distance = distance;
+        }
+    }
+}
