@@ -412,11 +412,11 @@ public class DistanceGraphApp {
         NodeData nd = new NodeData(N);
 
         try {
-            nd.loadNames("E:\\Project\\JAVA\\extra_work\\csv_files\\Final_Points.csv");
-            g.loadMatrix("E:\\Project\\JAVA\\extra_work\\csv_files\\updated_weights_matrix.csv");
+            nd.loadNames("csv_files/Final_Points_without_head.csv");
+            g.loadMatrix("csv_files/Matrix.csv");
 
             Map<Integer, Point> imageCoordinates = new HashMap<>();
-            try (Scanner scanner = new Scanner(new File("E:\\Project\\JAVA\\extra_work\\csv_files\\Final_Points_UPDATED.csv"))) {
+            try (Scanner scanner = new Scanner(new File("E:\\Project\\JAVA\\extra_work\\csv_files\\Points.csv"))) {
                 scanner.nextLine(); // skip header
                 int idx = 0;
                 while (scanner.hasNextLine()) {
@@ -487,12 +487,12 @@ public class DistanceGraphApp {
             contentPanel.add(locBox, gbc);
 
             JButton btn = new JButton("Find Shortest Path");
-btn.setBackground(new Color(25, 25, 180)); // Steel Blue
-btn.setForeground(Color.WHITE);
-btn.setFont(new Font("SansSerif", Font.BOLD, 14));
-btn.setFocusPainted(false);
-btn.setBorder(BorderFactory.createLineBorder(new Color(60, 100, 150), 2));
-btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            btn.setBackground(new Color(25, 25, 180)); // Steel Blue
+            btn.setForeground(Color.WHITE);
+            btn.setFont(new Font("SansSerif", Font.BOLD, 14));
+            btn.setFocusPainted(false);
+            btn.setBorder(BorderFactory.createLineBorder(new Color(60, 100, 150), 2));
+            btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
             gbc.gridy = 3;
             gbc.gridx = 0;
@@ -510,7 +510,7 @@ btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             gbc.gridy = 5;
             contentPanel.add(mapLabel, gbc);
 
-            MapPanel mapPanel = new MapPanel("E:\\Project\\JAVA\\extra_work\\extras\\map_without _points.png");
+            MapPanel mapPanel = new MapPanel("project1/MAP.png");
             JScrollPane mapScrollPane = new JScrollPane(mapPanel);
             mapScrollPane.setPreferredSize(new Dimension(700, 500));
             gbc.gridy = 6;
