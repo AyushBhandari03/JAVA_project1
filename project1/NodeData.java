@@ -1,5 +1,4 @@
 // NodeData.java
-// -------------
 // Handles metadata for each graph node.
 // - Stores names and nicknames of each location.
 // - Loads data from a CSV file with two columns per row.

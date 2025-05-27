@@ -1,25 +1,25 @@
+pip install googlemaps
+
 import pandas as pd
 import googlemaps
 import time
-import math
 
 # === CONFIGURATION ===
-GOOGLE_API_KEY = 'AIzaSyDKEeeuLicdClFhYahkSRV5_lUZKfjyuyU'  # Replace this with your actual key
-INPUT_FILE = '/content/Final_Points.csv'
-OUTPUT_FILE = 'batched_road_distance_matrix.csv'
-BATCH_LIMIT = 10  # You can do 10x10 requests (100 elements max)
+GOOGLE_API_KEY = 'AIzaSyCSorWsucWnOIhE8Z0rcIBUGc-Myfp2eas'  # Replace with your actual key
+INPUT_FILE = '/content/map_points1.csv'
+OUTPUT_FILE = 'new_matrix.csv'
+BATCH_LIMIT = 10  # 10x10 = 100 elements per API request
 
 # === STEP 1: Load and Clean Locations ===
-df = pd.read_csv(INPUT_FILE, header=None)
+df = pd.read_csv(INPUT_FILE, header=0)  # First row is header in your file
 locations = []
 
 for index, row in df.iterrows():
     try:
-        loc_id = row[0].strip()
-        name = row[1].strip()
-        coords = row[2].replace('°', '').replace('�', '').replace('N', '').replace('E', '').split(',')
-        lat = float(coords[0].strip())
-        lon = float(coords[1].strip())
+        loc_id = str(row[0]).strip()
+        name = str(row[1]).strip()
+        lat = float(row[2])
+        lon = float(row[3])
         locations.append((loc_id, name, lat, lon))
     except Exception as e:
         print(f"Skipping row {index} due to error: {e}")

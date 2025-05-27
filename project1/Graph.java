@@ -1,5 +1,4 @@
 // Graph.java
-// ----------
 // Represents the graph using an adjacency matrix.
 // - Stores distances between nodes (edges) as a 2D array.
 // - Loads the distance matrix from a CSV file.
