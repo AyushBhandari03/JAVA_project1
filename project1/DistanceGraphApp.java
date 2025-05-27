@@ -445,7 +445,14 @@ public class DistanceGraphApp {
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f.setSize(800, 700);
 
-            JPanel contentPanel = new JPanel();
+            JPanel contentPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.setColor(new Color(50, 100, 255)); // Light pastel background
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                }
+            };
             contentPanel.setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(10, 10, 10, 10);
@@ -480,6 +487,13 @@ public class DistanceGraphApp {
             contentPanel.add(locBox, gbc);
 
             JButton btn = new JButton("Find Shortest Path");
+btn.setBackground(new Color(25, 25, 180)); // Steel Blue
+btn.setForeground(Color.WHITE);
+btn.setFont(new Font("SansSerif", Font.BOLD, 14));
+btn.setFocusPainted(false);
+btn.setBorder(BorderFactory.createLineBorder(new Color(60, 100, 150), 2));
+btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
             gbc.gridy = 3;
             gbc.gridx = 0;
             gbc.gridwidth = 2;
@@ -491,7 +505,7 @@ public class DistanceGraphApp {
             gbc.gridy = 4;
             contentPanel.add(textScroll, gbc);
 
-            JLabel mapLabel = new JLabel("PATH POINTS");
+            JLabel mapLabel = new JLabel("PATH POINTS",SwingConstants.CENTER);
             mapLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
             gbc.gridy = 5;
             contentPanel.add(mapLabel, gbc);
