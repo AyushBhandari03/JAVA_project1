@@ -77,6 +77,6 @@ This project is licensed under the MIT License — feel free to use, modify, and
 Contributions are welcome! Feel free to fork this repo, submit issues, or send pull requests if you’d like to add new features or improve the existing implementation.
 
 📧 Contact
-For questions, suggestions, or bug reports, please reach out at your_email@example.com.
+For questions, suggestions, or bug reports, please reach out at hackmaster9703@gmail.com  .
 
 💡 QuickEats aims to make food delivery faster and smarter — one optimized route at a time!
