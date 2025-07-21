@@ -39,7 +39,7 @@ Ensure that all CSV files (Points.csv, Final_Points_without_head.csv, Matrix.csv
 
 ⚙️ Steps to Run
 Clone this repository:
-git clone https://github.com/your-username/quickeats-route-optimizer.git
+git clone https://github.com/AyushBhandari03/JAVA_project1
 cd quickeats-route-optimizer
 Place the CSV files inside the csv_files directory. Adjust file paths in DistanceGraphApp.java if needed.
 Compile the source files:
